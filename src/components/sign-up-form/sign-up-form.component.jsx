@@ -20,23 +20,24 @@ function SignUpForm () {
     try {
       const {user} = await auth.createUserWithEmailAndPassword (email, password);
       await createUserProfileDocument(user, {displayName});
-      console.log(user)
-    } catch (e) {
-      console.log(e)
+      console.log(user, {displayName})
+      setDisplayName(''); 
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+    } catch (error) {
+      console.log(error)
     }
   }
  
-
   const handleChange = (event) => {
     const {name, value} = event.target;
-      return name === 'displayName' ? setDisplayName(value) 
+      return (name === 'displayName' ? setDisplayName(value) 
       : name === 'email' ? setEmail(value)
       : name === 'password' ? setPassword(value)
       : name === 'confirmPassword' ? setConfirmPassword(value)
-      : '';
+      : '');
   } 
-
-  
 
   return (
     <div className="sign-up">
